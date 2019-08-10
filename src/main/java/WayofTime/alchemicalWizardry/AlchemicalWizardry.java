@@ -555,8 +555,6 @@ public class AlchemicalWizardry
 
     public static Fluid lifeEssenceFluid;
 
-    public static boolean isEventHelperAvaliable = false;
-
     // The instance of your mod that Forge uses.
     @Instance("AWWayofTime")
     public static AlchemicalWizardry instance;
@@ -657,12 +655,6 @@ public class AlchemicalWizardry
         HoldingPacketHandler.init();
         ClientToServerPacketHandler.init();
         ModAchievements.init();
-
-        try {
-            Class.forName("com.gamerforea.eventhelper.EventHelper");
-            isEventHelperAvaliable = true;
-            logger.info("EventHelper found adding support!");
-        } catch (Exception e) {}
     }
 
     @EventHandler
@@ -1987,14 +1979,13 @@ public class AlchemicalWizardry
     }
 
     public static boolean canSelfCut(EntityPlayer player, boolean alert){
-        if(player.getHealth() <= 0.5){
+        if(player.getHealth() <= 1F){
             if(alert){
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("func.selfcut.false")));
                 return false;
             }
             return false;
         }
-
         return true;
     }
 }

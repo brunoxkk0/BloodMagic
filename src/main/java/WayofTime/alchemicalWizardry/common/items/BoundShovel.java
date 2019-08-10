@@ -3,7 +3,6 @@ package WayofTime.alchemicalWizardry.common.items;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gamerforea.eventhelper.util.EventUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -169,12 +168,6 @@ public class BoundShovel extends ItemSpade implements IBindable
 
                     if (block != null)
                     {
-
-                        if(AlchemicalWizardry.isEventHelperAvaliable){
-                            if(EventUtils.cantBreak(par3EntityPlayer,posX + i, posY + j, posZ + k)) {
-                                return par1ItemStack;
-                            }
-                        }
 
                         float str = func_150893_a(par1ItemStack, block);
 

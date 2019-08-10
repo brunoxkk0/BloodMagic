@@ -4,7 +4,6 @@ import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
 import WayofTime.alchemicalWizardry.common.ItemType;
 import WayofTime.alchemicalWizardry.common.spell.complex.effect.SpellHelper;
-import com.gamerforea.eventhelper.util.EventUtils;
 import com.google.common.collect.HashMultiset;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -163,11 +162,7 @@ public class BoundAxe extends ItemAxe implements IBindable
 
                     if (block != null) {
 
-                        if(AlchemicalWizardry.isEventHelperAvaliable){
-                            if(EventUtils.cantBreak(par3EntityPlayer,posX + i, posY + j, posZ + k)) {
-                                return par1ItemStack;
-                            }
-                        }
+
 
                         float str = func_150893_a(par1ItemStack, block);
 
