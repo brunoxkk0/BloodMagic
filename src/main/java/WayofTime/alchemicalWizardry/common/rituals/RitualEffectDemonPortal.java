@@ -1,6 +1,7 @@
 package WayofTime.alchemicalWizardry.common.rituals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -9,6 +10,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import WayofTime.alchemicalWizardry.ModBlocks;
@@ -121,9 +123,20 @@ public class RitualEffectDemonPortal extends RitualEffect
     }
     
     @Override
-    public boolean startRitual(IMasterRitualStone ritualStone, EntityPlayer player)
-    {
-    	if(!checkJars(ritualStone))
+    public boolean startRitual(IMasterRitualStone ritualStone, EntityPlayer player) {
+
+        String[] disallowedWords = {"world","Islands","DIM1","DIM-1"};
+
+        if(!ritualStone.getWorld().isRemote){
+            if(Arrays.asList(disallowedWords).contains(ritualStone.getWorld().provider.getDimensionName())){
+                if(player != null){
+                    player.addChatComponentMessage(new ChatComponentText("§cYou can't perform this ritual in this dimension."));
+                    return false;
+                }
+            }
+        }
+
+        if(!checkJars(ritualStone))
     	{
     		player.addChatMessage(new ChatComponentTranslation("message.ritualdemonportal.missingjar"));
     		return false;
