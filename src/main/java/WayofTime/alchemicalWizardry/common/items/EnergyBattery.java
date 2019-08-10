@@ -133,6 +133,7 @@ public class EnergyBattery extends Item implements ArmourUpgrade, IBindable, IBl
             }
         }
 
+
         if (!player.capabilities.isCreativeMode)
         {
             for (int i = 0; i < damage; i++)
