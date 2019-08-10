@@ -1987,7 +1987,7 @@ public class AlchemicalWizardry
     }
 
     public static boolean canSelfCut(EntityPlayer player, boolean alert){
-        if(player.getHealth() <= 0.5){
+        if(player.getHealth() <= 2F){
             if(alert){
                 player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("func.selfcut.false")));
                 return false;
