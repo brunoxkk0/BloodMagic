@@ -1,8 +1,13 @@
 package WayofTime.alchemicalWizardry.common.items;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import WayofTime.alchemicalWizardry.AlchemicalWizardry;
+import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
+import WayofTime.alchemicalWizardry.common.ItemType;
+import WayofTime.alchemicalWizardry.common.spell.complex.effect.SpellHelper;
+import com.gamerforea.eventhelper.util.EventUtils;
+import com.google.common.collect.HashMultiset;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,15 +23,9 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import WayofTime.alchemicalWizardry.AlchemicalWizardry;
-import WayofTime.alchemicalWizardry.api.items.interfaces.IBindable;
-import WayofTime.alchemicalWizardry.common.ItemType;
-import WayofTime.alchemicalWizardry.common.spell.complex.effect.SpellHelper;
 
-import com.google.common.collect.HashMultiset;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoundAxe extends ItemAxe implements IBindable
 {
@@ -162,8 +161,14 @@ public class BoundAxe extends ItemAxe implements IBindable
                     Block block = par2World.getBlock(posX + i, posY + j, posZ + k);
                     int meta = par2World.getBlockMetadata(posX + i, posY + j, posZ + k);
 
-                    if (block != null)
-                    {
+                    if (block != null) {
+
+                        if(AlchemicalWizardry.isEventHelperAvaliable){
+                            if(EventUtils.cantBreak(par3EntityPlayer,posX + i, posY + j, posZ + k)) {
+                                return par1ItemStack;
+                            }
+                        }
+
                         float str = func_150893_a(par1ItemStack, block);
 
                         if (str > 1.1f || block instanceof BlockLeavesBase && par2World.canMineBlock(par3EntityPlayer, posX + i, posY + j, posZ + k))

@@ -561,3 +561,6 @@ bm.versioning.error=An error has occurred while downloading the mod!
 bm.versioning.downloadedAlready=You have the latest version already, reload your game to update!
 bm.versioning.downloadingAlready=It's downloading! Be patient!
 bm.versioning.disabled=This feature is disabled.
+
+#Others
+func.selfcut.false=§c§oVocê está muito fraco para relizar está ação...

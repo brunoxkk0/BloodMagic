@@ -97,8 +97,12 @@ public class SacrificialDagger extends Item
             return stack;
         }
     	
-        if (!player.capabilities.isCreativeMode)
-        {
+        if (!player.capabilities.isCreativeMode) {
+
+            if(!AlchemicalWizardry.canSelfCut(player, true)){
+                return stack;
+            }
+
         	SacrificeKnifeUsedEvent evt = new SacrificeKnifeUsedEvent(player, true, true, 2);
         	if(MinecraftForge.EVENT_BUS.post(evt))
         	{

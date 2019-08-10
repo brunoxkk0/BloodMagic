@@ -1,5 +1,6 @@
 package WayofTime.alchemicalWizardry.common.items.sigil;
 
+import java.util.Iterator;
 import java.util.List;
 
 import WayofTime.alchemicalWizardry.api.items.interfaces.ISigil;
@@ -158,18 +159,22 @@ public class SigilOfMagnetism extends EnergyItems implements ArmourUpgrade, IHol
             List<EntityItem> entities = par3EntityPlayer.worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(posX - 0.5f, posY - 0.5f, posZ - 0.5f, posX + 0.5f, posY + 0.5f, posZ + 0.5f).expand(range, verticalRange, range));
             List<EntityXPOrb> xpOrbs = par3EntityPlayer.worldObj.getEntitiesWithinAABB(EntityXPOrb.class, AxisAlignedBB.getBoundingBox(posX - 0.5f, posY - 0.5f, posZ - 0.5f, posX + 0.5f, posY + 0.5f, posZ + 0.5f).expand(range, verticalRange, range));
 
-            for (EntityItem entity : entities)
-            {
-                if (entity != null && !par2World.isRemote)
-                {
-                    entity.onCollideWithPlayer(par3EntityPlayer);
+            Iterator iterator = entities.iterator();
+
+            while (iterator.hasNext()) {
+                EntityItem item = (EntityItem)iterator.next();
+
+                if (item != null && !item.isDead && !par2World.isRemote) {
+                    item.onCollideWithPlayer(par3EntityPlayer);
                 }
             }
 
-            for (EntityXPOrb xpOrb : xpOrbs)
-            {
-                if (xpOrb != null && !par2World.isRemote)
-                {
+            iterator = xpOrbs.iterator();
+
+            while (iterator.hasNext()) {
+                EntityXPOrb xpOrb = (EntityXPOrb)iterator.next();
+
+                if (xpOrb != null && !xpOrb.isDead && !par2World.isRemote) {
                     xpOrb.onCollideWithPlayer(par3EntityPlayer);
                 }
             }

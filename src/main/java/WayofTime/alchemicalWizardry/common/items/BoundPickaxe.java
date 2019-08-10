@@ -3,6 +3,7 @@ package WayofTime.alchemicalWizardry.common.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gamerforea.eventhelper.util.EventUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -167,6 +168,13 @@ public class BoundPickaxe extends ItemPickaxe implements IBindable
 
                     if (block != null && block.getBlockHardness(par2World, posX + i, posY + j, posZ + k) != -1)
                     {
+
+                        if(AlchemicalWizardry.isEventHelperAvaliable){
+                            if(EventUtils.cantBreak(par3EntityPlayer,posX + i, posY + j, posZ + k)) {
+                                return par1ItemStack;
+                            }
+                        }
+
                         float str = func_150893_a(par1ItemStack, block);
 
                         if (str > 1.1f && par2World.canMineBlock(par3EntityPlayer, posX + i, posY + j, posZ + k))

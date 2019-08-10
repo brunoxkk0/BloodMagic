@@ -90,6 +90,10 @@ public class EnergyBattery extends Item implements ArmourUpgrade, IBindable, IBl
         	SoulNetworkHandler.setMaxOrbToMax(itemTag.getString("ownerName"), this.orbLevel);
         }
 
+        if(!AlchemicalWizardry.canSelfCut(par3EntityPlayer, true)){
+            return par1ItemStack;
+        }
+
         SoulNetworkHandler.addCurrentEssenceToMaximum(itemTag.getString("ownerName"), 200, this.getMaxEssence());
         EnergyItems.hurtPlayer(par3EntityPlayer, 200);
         return par1ItemStack;

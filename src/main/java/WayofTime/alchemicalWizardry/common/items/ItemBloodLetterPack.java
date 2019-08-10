@@ -150,6 +150,11 @@ public class ItemBloodLetterPack extends ItemArmor implements ArmourUpgrade, IAl
     	
     	if(world.getWorldTime() % tickRate == 0)
     	{
+
+            if(!AlchemicalWizardry.canSelfCut(player, true)){
+                return;
+            }
+
     		boolean shouldExecute = player.getHealth() / player.getMaxHealth() > activationPoint && this.getStoredLP(itemStack) < maxStored;
     		
     		if(shouldExecute)

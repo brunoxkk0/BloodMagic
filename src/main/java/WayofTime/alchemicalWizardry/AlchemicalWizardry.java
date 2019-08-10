@@ -12,6 +12,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -19,7 +20,9 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
@@ -552,6 +555,8 @@ public class AlchemicalWizardry
 
     public static Fluid lifeEssenceFluid;
 
+    public static boolean isEventHelperAvaliable = false;
+
     // The instance of your mod that Forge uses.
     @Instance("AWWayofTime")
     public static AlchemicalWizardry instance;
@@ -652,6 +657,12 @@ public class AlchemicalWizardry
         HoldingPacketHandler.init();
         ClientToServerPacketHandler.init();
         ModAchievements.init();
+
+        try {
+            Class.forName("com.gamerforea.eventhelper.EventHelper");
+            isEventHelperAvaliable = true;
+            logger.info("EventHelper found adding support!");
+        } catch (Exception e) {}
     }
 
     @EventHandler
@@ -1973,5 +1984,17 @@ public class AlchemicalWizardry
 //        event.registerServerCommand(new CommandSN());
         event.registerServerCommand(new CommandDownloadGAPI());
         event.registerServerCommand(new CommandBloodMagic());
+    }
+
+    public static boolean canSelfCut(EntityPlayer player, boolean alert){
+        if(player.getHealth() <= 0.5){
+            if(alert){
+                player.addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("func.selfcut.false")));
+                return false;
+            }
+            return false;
+        }
+
+        return true;
     }
 }

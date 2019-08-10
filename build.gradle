@@ -62,6 +62,7 @@ dependencies {
 	compile "codechicken:ForgeMultipart:1.7.10-1.1.0.314:dev"
 	compile "info.amerifrance.guideapi:Guide-API:" + config.mc_version + "-" + config.guideapi_version + ":deobf"
     compile "team.chisel:Chisel:" + config.chisel_version + ":api"
+    runtime fileTree(dir:"libs", include:"*.jar")
 }
 
 minecraft {

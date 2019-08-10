@@ -33,10 +33,9 @@ public class EnergyItems extends Item implements IBindable
         return this.energyUsed;
     }
 
-    protected void damagePlayer(World world, EntityPlayer player, int damage)
-    {
-        if (world != null)
-        {
+    protected void damagePlayer(World world, EntityPlayer player, int damage) {
+        if (world != null) {
+
             double posX = player.posX;
             double posY = player.posY;
             double posZ = player.posZ;
